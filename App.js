@@ -1,9 +1,14 @@
 import React, { Component } from "react";
 import { Spinner, Container } from "native-base";
 import { NavigationContainer } from "@react-navigation/native";
+import { Provider } from "react-redux";
+import store from "./redux";
 
 // Components
 import RootNavigator from "./Navigation";
+
+//Flash Message
+import FlashMessage from "react-native-flash-message";
 
 export default class App extends Component {
   state = {
@@ -23,11 +28,14 @@ export default class App extends Component {
       return <Spinner color="#132D4B" />;
     }
     return (
-      <NavigationContainer>
-        <Container>
-          <RootNavigator />
-        </Container>
-      </NavigationContainer>
+      <Provider store={store}>
+        <NavigationContainer>
+          <Container>
+            <RootNavigator />
+            <FlashMessage position="center" />
+          </Container>
+        </NavigationContainer>
+      </Provider>
     );
   }
 }
